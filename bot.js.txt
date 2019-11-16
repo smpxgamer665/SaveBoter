@@ -1,7 +1,7 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
 const fs = require('fs');
-const prefix = "<";
+const prefix = "برفكس حق بوتك";
 const moment = require('moment');
 const pretty = require("pretty-ms");
 const { User, MessageMentions } = require('discord.js') 
@@ -37,40 +37,40 @@ if(message.content.startsWith(prefix + "limit")) {
  
     if(!message.member.hasPermission('MANAGE_GUILD')) return;
     if(message.content.startsWith(prefix + "limitbans")) {
-        if(!num) return message.channel.send("**? | Supply a number !");
-        if(isNaN(num)) return message.channel.send("**? | Supply a number !**");
+        if(!num) return message.channel.send("**→ | Supply a number !");
+        if(isNaN(num)) return message.channel.send("**→ | Supply a number !**");
         config[message.guild.id].banLimit = num;
-        message.channel.send(`**? | Changed bans limit to : ${config[message.guild.id].banLimit}.**`)//Zine , Mohamed Tarek , Kbosh
+        message.channel.send(`**→ | Changed bans limit to : ${config[message.guild.id].banLimit}.**`)//Zine , Mohamed Tarek , Kbosh
     }
     if(message.content.startsWith(prefix + "limitkicks")) {
-        if(!num) return message.channel.send("**? | Supply a number !**");
-        if(isNaN(num)) return message.channel.send("**? | Supply a number !**");//Zine , Mohamed Tarek , Kbosh
+        if(!num) return message.channel.send("**→ | Supply a number !**");
+        if(isNaN(num)) return message.channel.send("**→ | Supply a number !**");//Zine , Mohamed Tarek , Kbosh
         config[message.guild.id].kickLimits = num;
-        message.channel.send(`**? | Changed kicks limit to : ${config[message.guild.id].kickLimits}.**`)
+        message.channel.send(`**→ | Changed kicks limit to : ${config[message.guild.id].kickLimits}.**`)
     }
     if(message.content.startsWith(prefix + "limitroleDelete")) {
-        if(!num) return message.channel.send("**? | Supply a number !**");
-        if(isNaN(num)) return message.channel.send("**? | Supply a number !**");
+        if(!num) return message.channel.send("**→ | Supply a number !**");
+        if(isNaN(num)) return message.channel.send("**→ | Supply a number !**");
         config[message.guild.id].roleDelLimit = num;
-        message.channel.send(`**? | Changed Role Deleting limit to : ${config[message.guild.id].roleDelLimit}.**`)
+        message.channel.send(`**→ | Changed Role Deleting limit to : ${config[message.guild.id].roleDelLimit}.**`)
     }
     if(message.content.startsWith(prefix + "limitroleCreate")) {
-        if(!num) return message.channel.send("**? | Supply a number !**");
-        if(isNaN(num)) return message.channel.send("**? | Supply a number !**");
+        if(!num) return message.channel.send("**→ | Supply a number !**");
+        if(isNaN(num)) return message.channel.send("**→ | Supply a number !**");
         config[message.guild.id].roleCrLimits = num;
-        message.channel.send(`**? | Changed Role Creation limit to : ${config[message.guild.id].roleCrLimits}.**`)
+        message.channel.send(`**→ | Changed Role Creation limit to : ${config[message.guild.id].roleCrLimits}.**`)
     }//Zine , Mohamed Tarek , Kbosh
     if(message.content.startsWith(prefix + "limitchannelDelete")) {
-        if(!num) return message.channel.send("**? | Supply a number !**");
-        if(isNaN(num)) return message.channel.send("**? | Supply a number !**");
+        if(!num) return message.channel.send("**→ | Supply a number !**");
+        if(isNaN(num)) return message.channel.send("**→ | Supply a number !**");
         config[message.guild.id].chaDelLimit = num;
-        message.channel.send(`**? | Changed Channel Deleting limit to : ${config[message.guild.id].chaDelLimit}.**`)
+        message.channel.send(`**→ | Changed Channel Deleting limit to : ${config[message.guild.id].chaDelLimit}.**`)
     }
     if(message.content.startsWith(prefix + "limittime")) {
-        if(!num) return message.channel.send("**? | Supply a number !**");
-        if(isNaN(num)) return message.channel.send("**? | Supply a number !**");
+        if(!num) return message.channel.send("**→ | Supply a number !**");
+        if(isNaN(num)) return message.channel.send("**→ | Supply a number !**");
         config[message.guild.id].time = num;
-        message.channel.send(`**? | Changed Times limit to : ${config[message.guild.id].time}.**`)
+        message.channel.send(`**→ | Changed Times limit to : ${config[message.guild.id].time}.**`)
     }
     fs.writeFile("./config.json", JSON.stringify(config, null, 2), function(e) {
         if(e) throw e;
@@ -107,7 +107,7 @@ client.on("channelDelete", async channel => {
             anti[channel.guild.id + entry.id].actions = "0"
         }, config[channel.guild.id].time * 1000)
         if (anti[channel.guild.id + entry.id].actions >= config[channel.guild.id].chaDelLimit) {
-            channel.guild.members.get(entry.id).ban().catch(e => channel.guild.owner.send(`**? | ${entry.username} , Deleted many __Channles__.**`))
+            channel.guild.members.get(entry.id).ban().catch(e => channel.guild.owner.send(`**→ | ${entry.username} , Deleted many __Channles__.**`))
             anti[channel.guild.id + entry.id].actions = "0"
             fs.writeFile("./config.json", JSON.stringify(config, null, 2), function (e) {//Zine , Mohamed Tarek , Kbosh
                 if (e) throw e;
@@ -153,7 +153,7 @@ client.on("roleDelete", async channel => {
             anti[channel.guild.id + entry.id].actions = "0"
         }, config[channel.guild.id].time * 1000)
         if (anti[channel.guild.id + entry.id].actions >= config[channel.guild.id].roleDelLimit) {
-            channel.guild.members.get(entry.id).ban().catch(e => channel.guild.owner.send(`**? | ${entry.username} , Deleted many __Roles__!**`))
+            channel.guild.members.get(entry.id).ban().catch(e => channel.guild.owner.send(`**→ | ${entry.username} , Deleted many __Roles__!**`))
             anti[channel.guild.id + entry.id].actions = "0"
             fs.writeFile("./config.json", JSON.stringify(config, null, 2), function (e) {
                 if (e) throw e;
@@ -199,7 +199,7 @@ client.on("roleCreate", async channel => {
             anti[channel.guild.id + entry.id].actions = "0"
         }, config[channel.guild.id].time * 1000)
         if (anti[channel.guild.id + entry.id].actions >= config[channel.guild.id].roleCrLimits) {
-            channel.guild.members.get(entry.id).ban().catch(e => channel.guild.owner.send(`**? | ${entry.username} , is creating many __Rooms__.**`))
+            channel.guild.members.get(entry.id).ban().catch(e => channel.guild.owner.send(`**→ | ${entry.username} , is creating many __Rooms__.**`))
             anti[channel.guild.id + entry.id].actions = "0"
             fs.writeFile("./config.json", JSON.stringify(config, null, 2), function (e) {
                 if (e) throw e;
@@ -222,4 +222,4 @@ client.on("roleCreate", async channel => {
 
 
 
-client.login("NjQ1MTMyNzAyNjU1MTg0OTA4.Xc-I2w.TJeghyjQVgw0GXEljBq1lJQjgiw");
+client.login("NjQ1MTMyNzAyNjU1MTg0OTA4.Xc-QbA.SApk-OOjkjKeho9rq_Rj-LNm8Rc");
